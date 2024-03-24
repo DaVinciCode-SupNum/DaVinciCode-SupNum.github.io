@@ -1,0 +1,42 @@
+{% include 'base.html' %}
+<style>
+
+</style>
+<main class="main">
+    <div class="container">
+        <div class="row">    
+    
+            <div class="col-lg-6">
+                <!-- Graphique -->
+                {% if best_tour %}
+                <div id="graph"></div>
+                {% endif %}
+            </div>
+            <div class="col-lg-5">
+                <!-- Résultats -->
+                <div id="result">
+                    {% if best_tour %}
+                        <h2>Best Tour</h2>
+                        <p>Best tour: {{ best_tour }}</p>
+                        <p>Minimum distance: {{ best_distance }} km</p>
+                        <h3>Distances between cities in the best tour:</h3>
+                        <ul>
+                            {% for city1, city2, distance in distances %}
+                                <li>{{ city1 }} to {{ city2 }}: {{ distance }} km</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Script pour afficher l'image -->
+<script>
+    var image_base64 = "{{ image_base64 }}";
+    var img = document.createElement('img');
+    img.src = 'data:image/png;base64,' + image_base64;
+    document.getElementById('graph').appendChild(img);
+</script>

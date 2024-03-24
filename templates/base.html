@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Import des bibliothèques externes -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Liaison vers le fichier CSS local -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Liaison vers Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <!-- Styles CSS personnalisés -->
+    <style>
+      #graph {
+          width: 80%;
+          margin: auto;
+      }
+      #result {
+          margin-top: 50px;
+      }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation latérale -->
+    <nav class="sidebar">
+        <a href="#" class="logo">Da Vinci Code</a>
+        <!-- Section pour choisir le fichier Excel -->
+        <div class="choisir">
+            <p class="text-p">Visualisez les algorithmes pour le problème du voyageur de commerce. Importez un fichier Excel contenant les coordonnées des villes mauritaniennes ci-dessous, choisissez un algorithme et contrôlez l'exécution.</p>
+        </div>
+        <!-- Contenu du menu -->
+        <div class="menu-content">
+            <ul class="menu-items">
+                <!-- Formulaire pour choisir le fichier, la ville de départ et l'algorithme -->
+                <li class="item">
+                    <form method="POST" action="{{ url_for('upload_and_choose_city') }}" enctype="multipart/form-data">
+                        <!-- Champ pour sélectionner le fichier -->
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="file" name="file" accept=".xlsx, .xls">
+                            </div>
+                        </div>
+                        <!-- Champ pour saisir la ville de départ -->
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Ville de départ</label>
+                            <input type="text" class="form-control" id="city" name="city">
+                        </div>
+                        <!-- Sélection de l'algorithme -->
+                        <div class="mb-3">
+                            <label class="form-label" for="">Algorithme</label>
+                            <div class="input-group">
+                                <select class="form-select" aria-label="Large select example" id="algorithm" name="algorithm">
+                                    <option value="" disabled selected>Choisez un algorithme</option>
+                                    <option value="ant">Ant Algorithm</option>
+                                    <option value="pst">PST Algorithm</option>
+                                </select>
+                                
+                            </div>   
+                        </div>
+                        <!-- Bouton de soumission du formulaire -->
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-primary" value="Visualisez">
+                        </div>
+                    </form>
+                    <!-- Bouton d'animation -->
+                    <div class="mb-3">
+                        <a href="{{ url_for('animation') }}" class="btn btn-primary" id="map">Map</a>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <!-- Import des scripts JS -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
